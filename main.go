@@ -437,7 +437,7 @@ func sendBackNewCartData(w http.ResponseWriter, r *http.Request) {
 		for i = 0; i < (length); i++ {
 
 			allProductIds = append(allProductIds, []string{r.Form["id"][i]}...)
-			allPurchaseAmounts = append(allPurchaseAmounts, []string{r.Form["quant"][i]}...)
+			allPurchaseAmounts = append(allPurchaseAmounts, []string{r.Form["amtTryingToPurchase"][i]}...)
 
 		}
 
@@ -455,7 +455,7 @@ func sendBackNewCartData(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("filters not present")
 	}
 
-	allPurchaseAmounts, present := query["quant"]
+	allPurchaseAmounts, present := query["amtTryingToPurchase"]
 	//in template 2 bought column
 	if !present || len(allPurchaseAmounts) == 0 {
 		fmt.Println("filters not present")
@@ -807,7 +807,7 @@ func createCartTemplate(w http.ResponseWriter, r *http.Request) {
 		for i = 0; i < (length); i++ {
 
 			allProductIds = append(allProductIds, []string{r.Form["id"][i]}...)
-			allPurchaseAmounts = append(allPurchaseAmounts, []string{r.Form["quant"][i]}...)
+			allPurchaseAmounts = append(allPurchaseAmounts, []string{r.Form["amtTryingToPurchase"][i]}...)
 
 		}
 
@@ -1045,7 +1045,7 @@ func createCartTemplate(w http.ResponseWriter, r *http.Request) {
 	} //for next loop
 
 	//https://stackoverflow.com/questions/24755509/using-conditions-inside-templates
-	globt = template.Must(template.ParseFiles("C:/wamp64/www/golangproj/cartTemplate.html"))
+	globt = template.Must(template.ParseFiles("C:/ProjPurchase/cartTemplate.html"))
 
 	err1 = globt.Execute(w, ProductListForCartTemplate)
 
@@ -1257,7 +1257,7 @@ func displayOrdersTemplateAgain(w http.ResponseWriter, r *http.Request) {
 		for i = 0; i < (length); i++ {
 
 			ProdID = append(ProdID, []string{r.Form["id"][i]}...)
-			keyTotalAmountBought = append(keyTotalAmountBought, []string{r.Form["quant"][i]}...)
+			keyTotalAmountBought = append(keyTotalAmountBought, []string{r.Form["amtTryingToPurchase"][i]}...)
 
 		}
 
@@ -1472,7 +1472,7 @@ func sendToTemplate(globKeyword *string, counter1 *int, w *http.ResponseWriter, 
 
 	fmt.Println(templ1)
 
-	globt = template.Must(template.ParseFiles("C:/wamp64/www/golangproj/template1.html"))
+	globt = template.Must(template.ParseFiles("C:/ProjPurchase/template1.html"))
 
 	//err1 := globt.Execute(w, testvar)
 	var err1 = globt.Execute(*w, templ1)
@@ -1513,7 +1513,7 @@ type display6 struct {
 type display5 struct {
 	Var   string `json:"var"`
 	Id    string `json:"id"`
-	Quant string `json:"quant"`
+	Quant string `json:"amtTryingToPurchase"`
 	Uid   string `json:"uid"`
 }
 */
@@ -1589,7 +1589,7 @@ func displayOrdersTemplate(w http.ResponseWriter, r *http.Request) {
 		/////////
 
 		ProdID = append(ProdID, []string{r.Form["id"][i]}...)
-		keyTotalAmountBought = append(keyTotalAmountBought, []string{r.Form["quant"][i]}...)
+		keyTotalAmountBought = append(keyTotalAmountBought, []string{r.Form["amtTryingToPurchase"][i]}...)
 
 	}
 	//////////
@@ -1618,7 +1618,7 @@ func displayOrdersTemplate(w http.ResponseWriter, r *http.Request) {
 
 			} else {
 				ProdID = append(ProdID, []string{r.Form["id"][i]}...)
-				keyTotalAmountBought = append(keyTotalAmountBought, []string{r.Form["quant"][i]}...)
+				keyTotalAmountBought = append(keyTotalAmountBought, []string{r.Form["amtTryingToPurchase"][i]}...)
 			}
 		}
 
@@ -1894,7 +1894,7 @@ func main() {
 
 	//
 	one.HandleFunc("/cartTemplate", createCartTemplate)
-	one.HandleFunc("/spitBackAmounts", sendBackNewCartData)
+	one.HandleFunc("/sendBackNewCartData", sendBackNewCartData)
 
 	http.ListenAndServe(":8080", one)
 

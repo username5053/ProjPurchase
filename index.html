@@ -50,7 +50,7 @@ var3 = var1 + var2;
     
       <input   id="button7"  type="button" value="checkout"/>
       <input   name = "search" type="text" id="search" name="search" placeholder= "apple99" value="apple99"/>
-      <input   id="button6" onclick = "displayFromSearch('0')" type="button" value="Search"/>
+      <input   id="button6" onclick = "displayFromSearch()" type="button" value="Search"/>
 	  <input   id="button8" onclick = "resetCall()" type="button" value="Reset"/>
 
 
@@ -77,6 +77,17 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 //fix this, here
 var searchterm = urlParams.get('displayOrdersTemplateAgain');
+
+alert("searchterm");
+alert(searchterm);
+
+if (searchterm == "1")
+{
+	//alert("made it");
+	displayOrdersTemplateAgain();
+	//displayFromSearch('0');
+	return(1);
+}
 
 
 /////////
@@ -109,12 +120,7 @@ for(let key of keys) {
 
 
 //alert("search");
-if (searchterm == "1")
-{
-	//alert("made it");
-	displayOrdersTemplateAgain();
-	//displayFromSearch('0');
-}
+
 
 return(1);
 ////////
@@ -196,7 +202,7 @@ $(document).ready(function () {
 
 			//sessionStorage.clear();
 			//program reprints search box and buttons
-			var urlValue = "http://localhost/golangproj/index.html";
+			var urlValue = "http://localhost/index.html";
 			var val1 = sessionStorage.getItem("sessionUserID");
 			
 			sessionStorage.clear();
@@ -355,8 +361,10 @@ $(document).ready(function () {
 			var item = sessionStorage.getItem(key);
 			
 			
-       		string =  string + "id=" + key + "&amtTryingToPurchase" + item + "&";
+       		string =  string + "id=" + key + "&amtTryingToPurchase =" + item + "&";
 			
+			   alert("here");
+			   alert(string);
 			
 			reloadFlag = 0;
   
@@ -545,28 +553,32 @@ else
 
 				
                 //var result1 = "";
-				let keys = Object.keys(sessionStorage);
+				//let keys = Object.keys(sessionStorage);
 
 				
-				var  gkeywordArray = "";
+				//var  gkeywordArray = "";
 				
-				var retVals = [];
+				//var retVals = [];
 				
-				var toRemove = "null";
-				var result = result.replaceAll(toRemove, '');
+				//var toRemove = "null";
+
+				//alert();
+				//var nextResult = result.replaceAll(toRemove, '');
 
 
 
-				
-				retVals = forBuildingHTML(result, searchWord);
+				//alert("fantastic");
+				//alert( nextResult);
+				//alert(searchWord);
+				//retVals = forBuildingHTML( nextResult, searchWord);
 				
 				
 				//fix this, here
-				var item1 = retVals[0];  
+				//var item1 = retVals[0];  
 				
-				var ourNewWord2 = retVals[1]; //
+				//var ourNewWord2 = retVals[1]; //
 				
-				var item = retVals[2]; 
+				//var item = retVals[2]; 
 				
 				
 				
@@ -576,7 +588,7 @@ else
 
 				
 				//fix this, here
-				var val1a = '"' + item1 +  '"';   
+				//var val1a = '"' + item1 +  '"';   
 				
 				
 
@@ -586,7 +598,7 @@ else
 				
 				
 				
-			  
+			  //alert("well?");
 
 
 				////////////
@@ -597,7 +609,7 @@ else
 				document.getElementById('buttons').innerHTML   += result1a;
 			  	
 
-				document.getElementById('templateOneHere').insertAdjacentHTML('beforeend',ourNewWord2);
+				document.getElementById('templateOneHere').insertAdjacentHTML('beforeend',result);
 
               
                 }
@@ -671,6 +683,7 @@ var gTotalOfPurchases = 0;
 //on submit, updates the individual printed interface from same template1
 
 
+//function submitChangesOnOrderTemplates()
 function submitChangesOnOrderTemplates(mainDiv, productID, amountPurchasedID, amountPurchasingID, amountToPurchaseID)
 {
 
@@ -1161,23 +1174,33 @@ function DoesKeywordAlreadyExist( searchword, string)
 //fix this, here   
 function forBuildingHTML(result, val1)
 {
-				var item1 = val1
+
+
+	alert("look at this");
+	alert(result);
+	alert(val1);//apple4
+
+
+	/*
+				var item1 = val1;
 				var item = '"' + val1 + '"';
 				
 				var ourNewWord = "";
 				
 				var item2 = result.match(item);
-				
+				alert(item2);  // apple4
 				ourNewWord = result.replace(item2, '');
-				
+				alert(ourNewWord);
 
 				//var string = typeof(item1);
 				
 				//var x = typeof(item1);  // string
 				//var y = typeof(string);	//string
 				
-				
-				
+				*/
+				var ourNewWord = result;
+				var  item = "";
+				var item1 = "";
 
 return [item1, ourNewWord, item];				
 }
@@ -1277,7 +1300,7 @@ for(let key of keys) {
 		gflag1 = 1;
 		alert("A5") ;
 		
-			querystring += "id=" + key + "&amtTryingToPurchase" + item + "&";
+			querystring += "id=" + key + "&amtTryingToPurchase=" + item + "&";
 		
 	}
 	
@@ -1337,22 +1360,23 @@ var url = "http://localhost:8080/displayOrdersTemplateAgain";
 			  
 
 
-			var retVals = [];
+			//var retVals = [];
 			//fix this, here :  two variables
-			var tempstringfortesting = "banana";
+			//var tempstringfortesting = "apple";
+			//alert("apple");
 			//result is html of displaying orders again (after cartTemplate)
-			retVals = forBuildingHTML(result , tempstringfortesting);
+			//retVals = forBuildingHTML(result , tempstringfortesting);
 			
 			//fix this, here
 			//var item1 = retVals[0];  
 			
-			var ourNewWord = retVals[1]; 
+			//var ourNewWord = retVals[1]; 
 			//var item = retVals[2];
 			
-			alert("derived here");
-			alert(ourNewWord);
-			alert(item);
-			alert(item1);
+			//alert("derived here");
+			//alert(ourNewWord);
+			//alert(item);//1
+			//alert(item1);
 			
 			
 			  
@@ -1370,20 +1394,23 @@ var url = "http://localhost:8080/displayOrdersTemplateAgain";
 
 
 				
-				var val1 = '["' + array[i] +  '"]';
+				////var val1 = '["' + array[i] +  '"]';
 
 				//html
-				ourNewWord = ourNewWord.replace(val1 , '');
+				////ourNewWord = ourNewWord.replace(val1 , '');
 				//fix this, here
-				retVals = forBuildingHTML(ourNewWord);
+				//retVals = forBuildingHTML(ourNewWord);
 				//create link to each keyword start
+
+				//alert("new word")
+				//alert(ourNewWord);
 				var result1a = "<a href='#" + array[i] + "'>" + array[i] + "</a><br>";
 
 				//positioning div at top of page
 				document.getElementById('buttons').innerHTML   += result1a;
 			  }
 			  //positioning div at top of page
-			  document.getElementById('templateOneHere').innerHTML   += ourNewWord;
+			  document.getElementById('templateOneHere').innerHTML   += result;
 			 
 			}
 		});
